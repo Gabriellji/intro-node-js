@@ -3,6 +3,8 @@ const path = require('path')
 
 // this path needs to be relative to work with fs
 const contactsLocation = path.join(__dirname, 'contacts.json');
+// console.log(__dirname, '-----');
+// console.log(contactsLocation, '++++++')
 
 /**
  * should read the contacts at the
@@ -20,7 +22,7 @@ const getContacts = () => {
  * @param {Object} contacts contacts object
  */
 const saveContacts = (contacts) => {
-  const list = JSON.stringify(contacts)
+  const list = JSON.stringify(contacts, null, 2)
   fs.writeFileSync(contactsLocation, list);
 }
 
