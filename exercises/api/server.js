@@ -42,8 +42,12 @@ const logRequest = (method, route, status) => console.log(method, route, status)
 
 const server = http.createServer(async (req, res) => {
   const method = req.method
+  console.log(req.statusCode, 'REQQQQQQ')
+  console.log(req.method, 'METHOD')
+  console.log(req.url, 'REQURL')
   const route = url.parse(req.url).pathname
   const match = router[`${route} ${method}`]
+  console.log(match, 'MAAAAATCH')
 
   if (!match) {
     res.writeHead(404)
@@ -52,7 +56,6 @@ const server = http.createServer(async (req, res) => {
     return
   }
   // this is sloppy, especially with more assets, create a "router"
-
     res.writeHead(200, { 'Content-Type': match.mime })
     res.write(await findAsset(match.asset))
     logRequest(method, route, 200)
